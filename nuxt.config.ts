@@ -1,11 +1,8 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify from 'vite-plugin-vuetify';
+
 export default defineNuxtConfig({
     ssr: true,
     components: true,
-    css: [
-        'vuetify/lib/styles/main.sass',
-        '@mdi/font/css/materialdesignicons.min.css',
-    ],
     build: {
         transpile: ['vuetify'],
     },
@@ -22,5 +19,12 @@ export default defineNuxtConfig({
                 prependPath: false,
             }
         }
-    }
+    },
+    modules: [
+        async (_, nuxt) => {
+            nuxt.hooks.hook('vite:extendConfig', (config) => {
+              config?.plugins?.push(vuetify());
+           });
+        }
+    ]
 });
