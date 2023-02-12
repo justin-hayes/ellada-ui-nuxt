@@ -9,6 +9,17 @@ export default defineNuxtConfig({
         transpile: ['vuetify'],
     },
     runtimeConfig: {
-        API_BASE_URL: process.env.API_BASE_URL
+        public: {
+            API_BASE_URL: process.env.API_BASE_URL
+        }
+    },
+    nitro: {
+        devProxy: {
+            '/api': {
+                target: 'http://localhost:3001',
+                changeOrigin: true,
+                prependPath: false,
+            }
+        }
     }
 });
