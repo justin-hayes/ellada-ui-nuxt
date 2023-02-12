@@ -22,15 +22,12 @@ export default defineNuxtConfig({
         }
     },
     modules: [
-        async (_, nuxt) => {
-            nuxt.hooks.hook('vite:extendConfig', (config) => {
-              config?.plugins?.push(vuetify());
-           });
-        }
-    ],
-    vite: {
-        ssr: {
-            noExternal: ['vuetify']
-        }
-    }
+        async (options, nuxt) => {
+            nuxt.hooks.hook("vite:extendConfig", (config) =>
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore TODO try to delete this ts-ignore after vuetify will be stable
+              config.plugins.push(vuetify())
+            );
+          }
+    ]
 });
