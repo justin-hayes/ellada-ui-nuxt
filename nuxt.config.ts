@@ -1,8 +1,9 @@
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineNuxtConfig({
-    ssr: false,
+    ssr: true,
     components: true,
+    css: ['vuetify/lib/styles/main.sass'],
     build: {
         transpile: ['vuetify'],
     },
