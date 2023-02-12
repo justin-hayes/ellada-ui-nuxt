@@ -53,10 +53,12 @@ jobs:
       - name: Install dependencies
         env:
           NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
         env:
           NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
