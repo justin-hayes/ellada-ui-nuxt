@@ -3,7 +3,7 @@ import vuetify from 'vite-plugin-vuetify';
 export default defineNuxtConfig({
     ssr: true,
     components: true,
-    css: ['vuetify/lib/styles/main.sass'],
+    css: ['vuetify/styles'],
     build: {
         transpile: ['vuetify'],
     },
@@ -27,5 +27,10 @@ export default defineNuxtConfig({
               config?.plugins?.push(vuetify());
            });
         }
-    ]
+    ],
+    vite: {
+        ssr: {
+            noExternal: ['vuetify']
+        }
+    }
 });
