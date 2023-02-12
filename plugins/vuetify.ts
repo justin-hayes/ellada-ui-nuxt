@@ -1,5 +1,5 @@
 import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // pre-build css styles
+import 'vuetify/styles';
 
 import { mdi, aliases as allAliases } from 'vuetify/iconsets/mdi-svg';
 const aliases = allAliases;
