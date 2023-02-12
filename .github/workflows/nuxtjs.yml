@@ -60,6 +60,8 @@ jobs:
           static_site_generator: nuxt
       - name: Restore cache
         uses: actions/cache@v3
+        env:
+          NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
         with:
           path: |
             dist
