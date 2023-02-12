@@ -6,7 +6,7 @@ const aliases = allAliases;
 
 export default defineNuxtPlugin(nuxtApp => {
     const vuetify = createVuetify({
-        ssr: true,
+        ssr: false,
         icons: {
           defaultSet: 'mdi',
           aliases,
