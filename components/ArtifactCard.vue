@@ -21,13 +21,13 @@ async function fetchRandomImage() {
         <VCardText>
             <div v-if="hasClassifications">
                 <span class="subheading">Classifications</span>
-                <VChipGroup>
+                <VChipGroup column>
                     <VChip v-for="category in data?.classifications">{{ category.name }}</VChip>
                 </VChipGroup>
             </div>
             <div v-if="hasTags">
                 <span class="subheading">Tags</span>
-                <VChipGroup>
+                <VChipGroup column>
                     <VChip v-for="tag in data?.tags">{{ tag.name }}</VChip>
                 </VChipGroup>
             </div>
