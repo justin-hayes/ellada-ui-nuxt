@@ -1,7 +1,21 @@
 import { $Fetch } from 'ofetch';
 
 export interface Artifact {
+    name: string
+    title: string
+    period: string
     imageId: string
+    date: string
+    tags: Tag[]
+    classifications: Classification[]
+}
+
+interface Tag {
+    name: String
+}
+
+interface Classification {
+    name: string
 }
   
 export interface ArtifactResponse {
@@ -17,5 +31,9 @@ export default class ArtifactService {
 
     async getAll({page = 1, limit = 10}: {page?: number, limit?: number}): Promise<ArtifactResponse> {
         return this.#fetch(`/artifact?limit=${limit}`);
+    }
+
+    async getRandom(): Promise<Artifact> {
+        return this.#fetch('/random/artifact');
     }
 }
