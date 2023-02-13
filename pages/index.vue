@@ -26,7 +26,7 @@
         </VCol>
         </VRow>
         <VRow>
-            <p>TODO: Insert image credit</p>
+            <p class="text-caption">Hero image by <a href="https://unsplash.com/photos/yqBvJJ8jGBQ">Constantinos Kollias</a> on <a href="https://unsplash.com">Unsplash</a></p>
         </VRow>
     </v-container>
 </template>
