@@ -5,8 +5,10 @@ const { $service } = nuxtApp;
 const { data } = await useAsyncData(() => $service.artifact.getRandom());
 const imageId = computed(() => data.value?.imageId ?? '');
 
-const hasClassifications = computed(() => data.value?.classifications.length)
-const hasTags = computed(() => data.value?.tags.length);
+const classifications = computed(() => data.value?.classifications.map(c => c.name) ?? []);
+const hasClassifications = computed(() => classifications.value.length);
+const tags = computed(() => data.value?.tags.map(t => t.name) ?? []);
+const hasTags = computed(() => tags.value.length);
 
 async function fetchRandomImage() {
     data.value = await $service.artifact.getRandom();
@@ -17,20 +19,10 @@ async function fetchRandomImage() {
     <VCard class="mx-auto">
         <ArtifactImage :image-id="imageId"/>
         <VCardTitle>{{ data?.name }}</VCardTitle>
-        <VCardSubtitle>{{ `${data?.period}, ${data?.date}` }}</VCardSubtitle>
+        <VCardSubtitle><NuxtLink :to="`/artifact?period=${data?.period}`">{{ data?.period }}</NuxtLink> period, {{ data?.date }}</VCardSubtitle>
         <VCardText>
-            <div v-if="hasClassifications">
-                <span class="subheading">Classifications</span>
-                <VChipGroup column>
-                    <VChip v-for="category in data?.classifications">{{ category.name }}</VChip>
-                </VChipGroup>
-            </div>
-            <div v-if="hasTags">
-                <span class="subheading">Tags</span>
-                <VChipGroup column>
-                    <VChip v-for="tag in data?.tags">{{ tag.name }}</VChip>
-                </VChipGroup>
-            </div>
+            <ChipGroup v-if="hasClassifications" title="Classifications" :chips="classifications" filter="classification" :wrap="true" />
+            <ChipGroup v-if="hasTags" title="Tags" :chips="tags" filter="tag" :wrap="true" />
         </VCardText>
         <VCardActions>
             <VBtn color="primary" @click="fetchRandomImage">Random</VBtn>

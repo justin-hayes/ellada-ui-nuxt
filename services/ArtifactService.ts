@@ -11,11 +11,19 @@ export interface Artifact {
 }
 
 interface Tag {
-    name: String
+    name: string
 }
 
 interface Classification {
     name: string
+}
+
+interface SearchParams {
+    page?: number
+    limit?: number
+    period?: string
+    classification?: string
+    tag?: string
 }
   
 export interface ArtifactResponse {
@@ -29,8 +37,10 @@ export default class ArtifactService {
         this.#fetch = $fetch;
     }
 
-    async getAll({page = 1, limit = 10}: {page?: number, limit?: number}): Promise<ArtifactResponse> {
-        return this.#fetch(`/artifact?limit=${limit}`);
+    async getAll(query: SearchParams = {page: 1, limit: 10}): Promise<ArtifactResponse> {
+        return this.#fetch('/artifact', {
+            query
+        });
     }
 
     async getRandom(): Promise<Artifact> {
