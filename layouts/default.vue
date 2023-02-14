@@ -8,17 +8,13 @@ const drawer = ref(false);
     <v-list>
       <v-list-item><NuxtLink to="/">Home</NuxtLink></v-list-item>
       <v-list-item><NuxtLink to="/artifact">Browse</NuxtLink></v-list-item>
-      <v-list-item>Bar</v-list-item>
-      <v-list-item>Baz</v-list-item>
     </v-list>
   </v-navigation-drawer>
-  <v-app-bar app color="primary">
-    <template v-slot:prepend>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </template>
-    <v-app-bar-title>Ellada</v-app-bar-title>
-  </v-app-bar>
-
+  <VAppBar app color="primary">
+    <VAppBarNavIcon class="hidden-sm-and-up" @click.stop="drawer = !drawer"></VAppBarNavIcon>
+    <VAppBarTitle><NuxtLink to="/" class="app-bar-title">Ellada</NuxtLink></VAppBarTitle>
+    <VBtn class="fill-height" to="/artifact">Browse</VBtn>
+  </VAppBar>
   <v-main>
     <v-container fluid>
         <slot />
@@ -26,3 +22,9 @@ const drawer = ref(false);
   </v-main>
 </v-app>
 </template>
+<style scoped>
+.app-bar-title {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
