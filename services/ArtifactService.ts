@@ -25,8 +25,17 @@ interface SearchParams {
     classification?: string
     tag?: string
 }
+
+interface Meta {
+    totalItems: number
+    itemCount: number
+    itemsPerPage: number
+    totalPages: number
+    currentPage: number
+}
   
 export interface ArtifactResponse {
+    meta: Meta
     items: Artifact[]
 }
   

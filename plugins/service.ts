@@ -1,8 +1,12 @@
 import { $fetch, FetchOptions } from 'ofetch';
 import ArtifactService from '~~/services/ArtifactService';
+import ClassificationService from '~~/services/ClassificationService';
+import TagService from '~~/services/TagService';
 
 export interface ServiceApi {
     artifact: ArtifactService
+    tag: TagService
+    classification: ClassificationService
 }
 
 export default defineNuxtPlugin(nuxtApp => {
@@ -14,6 +18,8 @@ export default defineNuxtPlugin(nuxtApp => {
 
     const services: ServiceApi = {
         artifact: new ArtifactService(apiFetcher),
+        tag: new TagService(apiFetcher),
+        classification: new ClassificationService(apiFetcher),
     };
 
     return {
