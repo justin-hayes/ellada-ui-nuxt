@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 defineProps<{
     imageId: string
 }>();
@@ -7,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-      <v-img
+      <VImg
         :src="`https://d21vzftmslcfab.cloudfront.net/images/${imageId}.jpg`"
         :lazy-src="`https://d21vzftmslcfab.cloudfront.net/images/${imageId}.jpg`"
         aspect-ratio="1"
@@ -15,17 +14,16 @@ defineProps<{
         class="bg-grey-lighten-2"
       >
         <template v-slot:placeholder>
-          <v-row
+          <VRow
             class="fill-height ma-0"
             align="center"
             justify="center"
           >
-            <v-progress-circular
+            <VProgressCircular
               indeterminate
               color="grey-lighten-5"
-            ></v-progress-circular>
-          </v-row>
+            ></VProgressCircular>
+          </VRow>
         </template>
-      </v-img>
-
+      </VImg>
 </template>
