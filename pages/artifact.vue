@@ -79,8 +79,13 @@ watch([periodRef, tagRef, classificationRef], () => pageRef.value = 1);
 
             </VCol>
             <VCol cols="12" md="8" lg="9" xl="10">
-                <ArtifactGallery :image-ids="imageIds"/>
-                <VPagination v-model="pageRef" :length="totalPages" :total-visible="7"></VPagination>
+                <div v-if="imageIds.length">
+                    <ArtifactGallery :image-ids="imageIds"/>
+                    <VPagination v-model="pageRef" :length="totalPages" :total-visible="7"></VPagination>
+                </div>
+                <div v-else>
+                    <p>No results for the provided search parameters.</p>
+                </div>
             </VCol>
         </VRow>
     </div>
