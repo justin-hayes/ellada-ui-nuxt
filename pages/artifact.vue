@@ -57,7 +57,7 @@ watch([periodRef, tagRef, classificationRef], () => pageRef.value = 1);
 <template>
     <div class="gallery">
         <VRow>
-            <VCol cols="3">
+            <VCol cols="12" md="4" lg="3" xl="2">
                 <div>
                     <h2>Period</h2>
                     <VChipGroup v-model="periodRef">
@@ -78,7 +78,7 @@ watch([periodRef, tagRef, classificationRef], () => pageRef.value = 1);
                 </div>
 
             </VCol>
-            <VCol cols="9">
+            <VCol cols="12" md="8" lg="9" xl="10">
                 <ArtifactGallery :image-ids="imageIds"/>
                 <VPagination v-model="pageRef" :length="totalPages" :total-visible="7"></VPagination>
             </VCol>
