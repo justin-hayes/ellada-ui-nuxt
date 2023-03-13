@@ -12,7 +12,6 @@ definePageMeta({
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
-const router = useRouter();
 
 const { $service } = nuxtApp;
 const { page, period, tag, classification } = route.query;
@@ -22,26 +21,18 @@ const tagRef = ref(tag);
 const classificationRef = ref(classification);
 
 const { data } = await useAsyncData(() => {
-    router.push({ query: {
-        page: pageRef.value,
-        period: periodRef.value,
-        tag: tagRef.value || undefined,
-        classification: classificationRef.value
-    }});
-
     return $service.artifact.getAll({
         page: pageRef.value,
         limit: 12,
-        period: periodRef.value?.toString(),
-        tag: tagRef.value?.toString(),
-        classification: classificationRef.value?.toString()
+        period: periodRef.value,
+        tag: tagRef.value,
+        classification: classificationRef.value
     })
 }, {
     watch: [pageRef, periodRef, tagRef, classificationRef]
 });
 
-const { data: tagData } = await useAsyncData(() => $service.tag.getAll());
-const tags = computed(() => tagData.value || []);
+const { data: tags } = await useAsyncData(() => $service.tag.getAll() || []);
 const { data: classifications } = await useAsyncData(() => $service.classification.getAll());
 const imageIds = computed(() => data.value?.items?.map(a => a.imageId) ?? []);
 const totalPages = computed(() => data.value?.meta.totalPages ?? 1);
@@ -50,6 +41,16 @@ watch(data, () => {
     if (meta && meta.currentPage > meta.totalItems) {
         pageRef.value = 1;
     }
+});
+watch([periodRef, tagRef, classificationRef, pageRef], () => {
+    return navigateTo({
+        query: {
+            page: pageRef.value,
+            period: periodRef.value,
+            tag: tagRef.value || undefined,
+            classification: classificationRef.value
+        }
+    });
 });
 watch([periodRef, tagRef, classificationRef], () => pageRef.value = 1);
 </script>
@@ -76,7 +77,6 @@ watch([periodRef, tagRef, classificationRef], () => pageRef.value = 1);
                     <h2>Tag</h2>
                     <VAutocomplete label="Tag" clearable :items="tags" v-model="tagRef"/>
                 </div>
-
             </VCol>
             <VCol cols="12" md="8" lg="9" xl="10">
                 <div v-if="imageIds.length">
