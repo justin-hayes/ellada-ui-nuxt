@@ -34,7 +34,7 @@
 <style scoped>
 @media (min-width: 1600px) {
     .main {
-        max-width: 65vw;
+        max-width: 50vw;
     }
 }
 </style>
