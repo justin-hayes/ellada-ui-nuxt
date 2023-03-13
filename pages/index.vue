@@ -1,5 +1,5 @@
 <template>
-    <v-parallax height="700px" src="hero.jpg">
+    <VParallax height="70vh" src="hero.jpg">
         <div class="d-flex flex-column fill-height justify-center align-center text-white">
             <h1 class="text-h1 font-weight-thin mb-4">
                 Ελλάδα
@@ -8,8 +8,8 @@
                 Explore the world of ancient Greece
             </h4>
         </div>
-    </v-parallax>
-    <v-container>
+    </VParallax>
+    <VContainer class="main">
         <VRow>
         <VCol cols="12" sm="7">
         <section>
@@ -28,5 +28,13 @@
         <VRow>
             <p class="text-caption">Hero image by <a href="https://unsplash.com/photos/yqBvJJ8jGBQ">Constantinos Kollias</a> on <a href="https://unsplash.com">Unsplash</a></p>
         </VRow>
-    </v-container>
+    </VContainer>
 </template>
+
+<style scoped>
+@media (min-width: 1600px) {
+    .main {
+        max-width: 75vw;
+    }
+}
+</style>
